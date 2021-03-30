@@ -1,35 +1,44 @@
 package com.example.motobratstvo.ui.feed;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-
+import androidx.recyclerview.widget.RecyclerView;
 import com.example.motobratstvo.R;
+import java.util.ArrayList;
 
 public class FeedFragment extends Fragment {
 
-    private FeedViewModel feedViewModel;
+    private void setInitialData(){
 
+        news.add(new News ("Новость ", "тест", R.drawable.icon));
+        news.add(new News ("Новость ", "тест", R.drawable.icon));
+        news.add(new News ("Новость ", "тест", R.drawable.icon));
+        news.add(new News ("Новость ", "тест", R.drawable.icon));
+        news.add(new News ("Новость ", "тест", R.drawable.icon));
+        news.add(new News ("Новость ", "тест", R.drawable.icon));
+        news.add(new News ("Новость ", "тест", R.drawable.icon));
+    }
+
+
+    ArrayList<News> news = new ArrayList<News>();
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        feedViewModel =
-                new ViewModelProvider(this).get(FeedViewModel.class);
+
         View root = inflater.inflate(R.layout.fragment_feed, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
-        feedViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+
+        RecyclerView recView = root.findViewById(R.id.list);
+        // начальная инициализация списка
+        setInitialData();
+        // создаем адаптер
+        StateAdapter adapter = new StateAdapter((Context) getActivity(), news);
+        // устанавливаем для списка адаптер
+        recView.setAdapter(adapter);
+
         return root;
     }
 }
