@@ -1,6 +1,7 @@
 package com.example.motobratstvo.ui.map;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,9 +24,9 @@ public class MapFragment extends Fragment {
 
     @Override public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        MapKitFactory.setApiKey("0f07d937-a358-4269-836d-33d9285feea5");
-        MapKitFactory.initialize(this.getContext());
     }
+
+    /** INFLATE AND POSITION **/
 
     @Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_map, container, false);
@@ -38,14 +39,13 @@ public class MapFragment extends Fragment {
 
     @Override public void onStart() {
         super.onStart();
-        mapView.onStart();
         MapKitFactory.getInstance().onStart();
+        mapView.onStart();
     }
 
     @Override public void onStop() {
         super.onStop();
-        mapView.onStop();
         MapKitFactory.getInstance().onStop();
+        mapView.onStop();
     }
-
 }
