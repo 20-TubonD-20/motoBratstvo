@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1074554818369",
+    "project_id": "motobratstvo-9e9ff",
+    "storage_bucket": "motobratstvo-9e9ff.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1074554818369:android:597ebe35aa8e2728121bc0",
+        "android_client_info": {
+          "package_name": "com.example.motobratstvo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1074554818369-5vmiar9fu6fr42j6ae82jad17l086245.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgOx5-pF3hMp0671NJB_HsYxw3fNRVugQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1074554818369-5vmiar9fu6fr42j6ae82jad17l086245.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

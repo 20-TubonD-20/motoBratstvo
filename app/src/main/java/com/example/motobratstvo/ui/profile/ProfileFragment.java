@@ -7,10 +7,14 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.motobratstvo.MainActivity;
 import com.example.motobratstvo.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 
 public class ProfileFragment extends Fragment {
+
     @Override public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
@@ -18,8 +22,14 @@ public class ProfileFragment extends Fragment {
     /** INFLATE **/
 
     @Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-       View view = inflater.inflate(R.layout.fragment_profile_not_auth, container, false);
-       return view;
+        View view;
+        if(MainActivity.isAuth) {
+            view = inflater.inflate(R.layout.fragment_profile_auth, container, false);
+        }
+        else {
+            view = inflater.inflate(R.layout.fragment_profile_not_auth, container, false);
+        }
+        return view;
     }
 
     @Override public void onStart() {

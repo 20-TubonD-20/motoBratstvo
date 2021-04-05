@@ -51,7 +51,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public static class ViewHolder extends RecyclerView.ViewHolder {
         //final ImageView imageView;
         final TextView titleView, textView;
-        final ViewPager2 viewPager2;
+        //final ViewPager2 viewPager2;
 
 
         ViewHolder(View view) {
@@ -59,7 +59,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             //imageView = (ImageView)view.findViewById(R.id.newsImage);
             textView = (TextView) view.findViewById(R.id.textNews);
             titleView = (TextView) view.findViewById(R.id.titleNews);
-            viewPager2 = (ViewPager2) view.findViewById(R.id.viewPagerImages);
+            //viewPager2 = (ViewPager2) view.findViewById(R.id.viewPagerImages);
         }
     }
 }
