@@ -8,34 +8,37 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
 
 
+import com.example.motobratstvo.MainActivity;
 import com.example.motobratstvo.R;
 
 import java.util.List;
 
-public class StateAdapter extends RecyclerView.Adapter<StateAdapter.ViewHolder>{
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
 
     private final LayoutInflater inflater;
     private final List<News> news;
 
-    StateAdapter(Context context, List<News> news) {
+    RecyclerViewAdapter(Context context, List<News> news) {
         this.news = news;
         this.inflater = LayoutInflater.from(context);
     }
     @Override
-    public com.example.motobratstvo.ui.feed.StateAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        @SuppressLint("ResourceType") View view = inflater.inflate(R.layout.list_item, parent, false);
+        @SuppressLint("ResourceType") View view = inflater.inflate(R.layout.recycler_view_cards, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(com.example.motobratstvo.ui.feed.StateAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerViewAdapter.ViewHolder holder, int position) {
         News news_ = news.get(position);
-        holder.imageView.setImageResource(news_.getImage());
+        //holder.imageView.setImageResource(news_.getImage());
         holder.textView.setText(news_.getText());
         holder.titleView.setText(news_.getTitle());
     }
@@ -46,15 +49,17 @@ public class StateAdapter extends RecyclerView.Adapter<StateAdapter.ViewHolder>{
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        final ImageView imageView;
+        //final ImageView imageView;
         final TextView titleView, textView;
+        final ViewPager2 viewPager2;
 
 
-        ViewHolder(View view){
+        ViewHolder(View view) {
             super(view);
-            imageView = (ImageView)view.findViewById(R.id.newsImage);
+            //imageView = (ImageView)view.findViewById(R.id.newsImage);
             textView = (TextView) view.findViewById(R.id.textNews);
             titleView = (TextView) view.findViewById(R.id.titleNews);
+            viewPager2 = (ViewPager2) view.findViewById(R.id.viewPagerImages);
         }
     }
 }

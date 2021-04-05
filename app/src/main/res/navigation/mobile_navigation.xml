@@ -8,19 +8,19 @@
     <fragment
         android:id="@+id/navigation_feed"
         android:name="com.example.motobratstvo.ui.feed.FeedFragment"
-        android:label="@string/title_home"
+        android:label="@string/title_feed"
         tools:layout="@layout/fragment_feed" />
 
     <fragment
         android:id="@+id/navigation_map"
         android:name="com.example.motobratstvo.ui.map.MapFragment"
-        android:label="@string/title_dashboard"
+        android:label="@string/title_map"
         tools:layout="@layout/fragment_map" />
 
     <fragment
         android:id="@+id/navigation_profile"
         android:name="com.example.motobratstvo.ui.profile.ProfileFragment"
-        android:label="profile" />
+        android:label="@string/title_profile" />
     <!-- tools:layout="@layout/fragment_profile_not_auth" -->
 
 </navigation>

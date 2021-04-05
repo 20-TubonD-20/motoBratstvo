@@ -35,10 +35,14 @@ public class FeedFragment extends Fragment {
         // начальная инициализация списка
         setInitialData();
         // создаем адаптер
-        StateAdapter adapter = new StateAdapter((Context) getActivity(), news);
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter((Context) getActivity(), news);
         // устанавливаем для списка адаптер
         recView.setAdapter(adapter);
 
         return root;
+    }
+
+    public static int getSize(){
+        return 1;
     }
 }
