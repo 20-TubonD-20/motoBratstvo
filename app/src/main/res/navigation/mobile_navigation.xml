@@ -17,5 +17,10 @@
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_map" />
 
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.example.motobratstvo.ui.profile.ProfileFragment"
+        android:label="profile" />
+    <!-- tools:layout="@layout/fragment_profile_not_auth" -->
 
 </navigation>
