@@ -42,6 +42,9 @@ public class ProfileFragment extends Fragment {
             nameText = view.findViewById(R.id.textNameAuth);
             avatar = view.findViewById(R.id.imageAvatar);
             logoutButton = view.findViewById(R.id.logOut);
+
+            avatar.setImageResource(R.drawable.icon);
+
         }
         else {
             view = inflater.inflate(R.layout.fragment_profile_not_auth, container, false);

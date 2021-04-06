@@ -50,7 +50,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="177dp"
         android:layout_marginRight="177dp"
-        android:layout_marginBottom="264dp"
+        android:layout_marginBottom="100dp"
         android:text="textview"
         android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/logOut"
@@ -61,7 +61,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="260dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/textEmailAuth"
         app:layout_constraintEnd_toEndOf="parent"
@@ -70,34 +70,32 @@
 
         <ImageView
             android:id="@+id/imageAvatar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="150dp"
-            android:layout_marginLeft="150dp"
-            android:layout_marginEnd="150dp"
-            android:layout_marginRight="150dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:contentDescription="todo"
+            android:src="@drawable/icon"
+
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars"
-            android:contentDescription="todo" />
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
         android:id="@+id/logOut"
-        android:backgroundTint="@color/lightGray"
-        android:textColor="@color/white"
-        android:text="@string/button_login_out"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="160dp"
         android:layout_marginLeft="160dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="160dp"
         android:layout_marginRight="160dp"
         android:layout_marginBottom="50dp"
+        android:backgroundTint="@color/lightGray"
+        android:text="@string/button_login_out"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
