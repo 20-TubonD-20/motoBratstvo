@@ -5,17 +5,12 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.PagerAdapter;
-import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager2.widget.ViewPager2;
-
-
-import com.example.motobratstvo.MainActivity;
 import com.example.motobratstvo.R;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -28,8 +23,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         this.news = news;
         this.inflater = LayoutInflater.from(context);
     }
+    @NotNull
     @Override
-    public RecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerViewAdapter.ViewHolder onCreateViewHolder(@NotNull ViewGroup parent, int viewType) {
 
         @SuppressLint("ResourceType") View view = inflater.inflate(R.layout.recycler_view_cards, parent, false);
         return new ViewHolder(view);
@@ -57,8 +53,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         ViewHolder(View view) {
             super(view);
             //imageView = (ImageView)view.findViewById(R.id.newsImage);
-            textView = (TextView) view.findViewById(R.id.textNews);
-            titleView = (TextView) view.findViewById(R.id.titleNews);
+            textView = view.findViewById(R.id.textNews);
+            titleView = view.findViewById(R.id.titleNews);
             //viewPager2 = (ViewPager2) view.findViewById(R.id.viewPagerImages);
         }
     }
