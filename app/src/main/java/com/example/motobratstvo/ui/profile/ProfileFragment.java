@@ -1,5 +1,6 @@
 package com.example.motobratstvo.ui.profile;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import androidx.navigation.Navigation;
 
 import com.example.motobratstvo.MainActivity;
 import com.example.motobratstvo.R;
+import com.example.motobratstvo.ui.RegistrationActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
 import org.jetbrains.annotations.NotNull;
@@ -23,7 +25,7 @@ public class ProfileFragment extends Fragment {
 
     private TextView emailText, passwordText, nameText, textRules;
     private ImageView avatar;
-    private Button loginButton, logoutButton;
+    private Button loginButton, logoutButton, registerButton;
 
     @Override public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +53,7 @@ public class ProfileFragment extends Fragment {
             emailText = view.findViewById(R.id.editTextEmailAddress);
             passwordText = view.findViewById(R.id.editTextPassword);
             loginButton = view.findViewById(R.id.buttonLogin);
+            registerButton = view.findViewById(R.id.buttonRegister);
         }
         return view;
     }
@@ -62,6 +65,11 @@ public class ProfileFragment extends Fragment {
         assert mainActivity != null;
         if(!mainActivity.isAuth) {
 
+            registerButton.setOnClickListener(view -> {
+                Intent intent = new Intent(mainActivity, RegistrationActivity.class);
+                startActivity(intent);
+            });
+
             loginButton.setOnClickListener(v -> {
                 Log.d("BUTTOM TEST", emailText.getText().toString());
                 Log.d("BUTTOM TEST", passwordText.getText().toString());
@@ -69,17 +77,23 @@ public class ProfileFragment extends Fragment {
                 mainActivity.email = emailText.getText().toString();
                 mainActivity.password = passwordText.getText().toString();
                 mainActivity.signIn(mainActivity.email, mainActivity.password);
+
+                mainActivity.saveConf();
+
                 Navigation.findNavController(v).navigate(R.id.navigation_feed);
+
             });
         }
         else {
             logoutButton.setOnClickListener(v -> {
 
-                mainActivity.email = "0";
-                mainActivity.password = "0";
+                mainActivity.email = "null";
+                mainActivity.password = "null";
+                mainActivity.saveConf();
 
                 FirebaseAuth.getInstance().signOut();
                 mainActivity.isAuth = false;
+
                 Navigation.findNavController(v).navigate(R.id.navigation_feed);
             });
         }

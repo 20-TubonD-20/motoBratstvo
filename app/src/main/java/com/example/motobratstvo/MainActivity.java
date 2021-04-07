@@ -1,7 +1,12 @@
 package com.example.motobratstvo;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.Toast;
 
 
@@ -22,12 +27,40 @@ public class MainActivity extends AppCompatActivity {
     public FirebaseAuth mAuth;
     public String email = "aaa", password = "aaa";
     public boolean isAuth = false;
+
     public NavController navController;
+
+    public static String APP_PREFERENCES = "usersettings";
+    public static String APP_PREFERENCES_EMAIL = "email";
+    public static String APP_PREFERENCES_PASSWORD = "password";
+    SharedPreferences mSettings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+/*        SharedPreferences.Editor editor = mSettings.edit();
+        editor.putString(APP_PREFERENCES_EMAIL, email);
+        editor.putString(APP_PREFERENCES_PASSWORD, password);
+        editor.apply();
+*/
+
+        mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+
+
+        if(mSettings.contains(APP_PREFERENCES_EMAIL)) {
+            email = mSettings.getString(APP_PREFERENCES_EMAIL, "null");
+        }
+        if(mSettings.contains(APP_PREFERENCES_PASSWORD)) {
+            password = mSettings.getString(APP_PREFERENCES_PASSWORD, "null");
+        }
+
         mAuth = FirebaseAuth.getInstance();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser != null){
+            reload();
+        }
         signIn(email, password);
 
         MapKitFactory.setApiKey("0f07d937-a358-4269-836d-33d9285feea5");
@@ -78,12 +111,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
-            reload();
-        }
-        signIn(email, password);
 
     }
 
@@ -119,6 +146,9 @@ public class MainActivity extends AppCompatActivity {
                         Log.d(TAG, "signInWithEmail:success");
                         FirebaseUser user = mAuth.getCurrentUser();
                         updateUI(user);
+
+
+
                     } else {
                         isAuth = false;
                         // If sign in fails, display a message to the user.
@@ -147,4 +177,17 @@ public class MainActivity extends AppCompatActivity {
 
     public void updateUI(FirebaseUser user) { }
 
+    public void saveConf() {
+        SharedPreferences.Editor editor = mSettings.edit();
+        editor.putString(APP_PREFERENCES_EMAIL, email);
+        editor.putString(APP_PREFERENCES_PASSWORD, password);
+        editor.apply();
+    }
+/*
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        NavigationUI.onNavDestinationSelected(item, navController);
+        return super.onOptionsItemSelected(item);
+    }
+*/
 }
