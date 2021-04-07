@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
@@ -16,6 +17,7 @@ import androidx.navigation.Navigation;
 import com.example.motobratstvo.MainActivity;
 import com.example.motobratstvo.R;
 import com.example.motobratstvo.ScrActivity.ScrActivity;
+import com.example.motobratstvo.checker.StringChecker;
 import com.example.motobratstvo.ui.RegistrationActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -76,10 +78,28 @@ public class ProfileFragment extends Fragment {
                 Log.d("BUTTOM TEST", emailText.getText().toString());
                 Log.d("BUTTOM TEST", passwordText.getText().toString());
 
-                scrActivity.email = emailText.getText().toString();
-                scrActivity.password = passwordText.getText().toString();
-                scrActivity.saveConf();
-                scrActivity.signInSecond(scrActivity.email, scrActivity.password);
+                StringChecker stringChecker = new StringChecker();
+
+                String passwordBuff, emailBuff;
+
+                emailBuff = emailText.getText().toString();
+                passwordBuff = passwordText.getText().toString();
+
+                if(stringChecker.checkPassword(passwordBuff) == 1) {
+                    Toast.makeText((ScrActivity) getActivity(), "Error: must be > 5 syms",
+                            Toast.LENGTH_SHORT).show();
+                }
+
+                else if(stringChecker.checkEmail(emailBuff) == 1) {
+                    Toast.makeText((ScrActivity) getActivity(), "Error: must be one @",
+                            Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    scrActivity.email = emailBuff;
+                    scrActivity.password = passwordBuff;
+                    scrActivity.saveConf();
+                    scrActivity.signInSecond(emailBuff, passwordBuff);
+                }
 
             });
         }
