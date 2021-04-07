@@ -18,7 +18,7 @@ import androidx.navigation.ui.NavigationUI;
 public class ScrActivity extends AppCompatActivity {
 
     private static final String TAG = "EmailPassword";
-    public FirebaseAuth mAuth;
+    public static FirebaseAuth mAuth;
     public String email = "null", password = "null";
     public boolean isAuth = false;
 
