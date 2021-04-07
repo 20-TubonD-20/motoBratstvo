@@ -1,18 +1,14 @@
 package com.example.motobratstvo.ScrActivity;
+
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
-
-
 import com.example.motobratstvo.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.yandex.mapkit.MapKitFactory;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -59,7 +55,7 @@ public class ScrActivity extends AppCompatActivity {
         if(currentUser != null){
             reload();
         }
-        if(!(email == "null" && password == "null")) signIn(email, password);
+        if(!(email.equals("null") && password.equals("null"))) signIn(email, password);
 
 
         setContentView(R.layout.activity_main);
@@ -164,7 +160,6 @@ public class ScrActivity extends AppCompatActivity {
                         Log.d(TAG, "signInWithEmail:success");
                         FirebaseUser user = mAuth.getCurrentUser();
                         updateUI(user);
-                        restart();
                     } else {
                         isAuth = false;
                         // If sign in fails, display a message to the user.
@@ -191,18 +186,15 @@ public class ScrActivity extends AppCompatActivity {
 
     public void reload() { }
 
-    public void updateUI(FirebaseUser user) { }
+    public void updateUI(FirebaseUser user) {
+        super.finish();
+    }
 
     public void saveConf() {
         SharedPreferences.Editor editor = mSettings.edit();
         editor.putString(APP_PREFERENCES_EMAIL, email);
         editor.putString(APP_PREFERENCES_PASSWORD, password);
         editor.apply();
-    }
-
-    public void restart() {
-
-        super.finish();
     }
 /*
     @Override

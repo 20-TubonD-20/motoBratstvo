@@ -10,17 +10,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
-
-import com.example.motobratstvo.MainActivity;
 import com.example.motobratstvo.R;
 import com.example.motobratstvo.ScrActivity.ScrActivity;
 import com.example.motobratstvo.checker.StringChecker;
 import com.example.motobratstvo.ui.RegistrationActivity;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import org.jetbrains.annotations.NotNull;
 
