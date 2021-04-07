@@ -19,6 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.RegistrationActivity"></activity>
+        <activity android:name=".ScrActivity.ScrActivity"></activity>
     </application>
 
 </manifest>

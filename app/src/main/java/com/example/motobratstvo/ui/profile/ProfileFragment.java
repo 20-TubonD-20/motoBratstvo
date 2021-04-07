@@ -15,6 +15,7 @@ import androidx.navigation.Navigation;
 
 import com.example.motobratstvo.MainActivity;
 import com.example.motobratstvo.R;
+import com.example.motobratstvo.ScrActivity.ScrActivity;
 import com.example.motobratstvo.ui.RegistrationActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -35,9 +36,9 @@ public class ProfileFragment extends Fragment {
 
     @Override public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view;
-        MainActivity mainActivity = (MainActivity)getActivity();
-        assert mainActivity != null;
-        if(mainActivity.isAuth) {
+        ScrActivity scrActivity = (ScrActivity)getContext();
+        assert scrActivity != null;
+        if(scrActivity.isAuth) {
             view = inflater.inflate(R.layout.fragment_profile_auth, container, false);
             emailText = view.findViewById(R.id.textEmailAuth);
             textRules = view.findViewById(R.id.textRules);
@@ -60,13 +61,13 @@ public class ProfileFragment extends Fragment {
 
     @Override public void onStart() {
         super.onStart();
-        MainActivity mainActivity = (MainActivity)getActivity();
+        ScrActivity scrActivity = (ScrActivity) getContext();
 
-        assert mainActivity != null;
-        if(!mainActivity.isAuth) {
+        assert scrActivity != null;
+        if(!scrActivity.isAuth) {
 
             registerButton.setOnClickListener(view -> {
-                Intent intent = new Intent(mainActivity, RegistrationActivity.class);
+                Intent intent = new Intent(scrActivity, RegistrationActivity.class);
                 startActivity(intent);
             });
 
@@ -74,11 +75,11 @@ public class ProfileFragment extends Fragment {
                 Log.d("BUTTOM TEST", emailText.getText().toString());
                 Log.d("BUTTOM TEST", passwordText.getText().toString());
 
-                mainActivity.email = emailText.getText().toString();
-                mainActivity.password = passwordText.getText().toString();
-                mainActivity.signIn(mainActivity.email, mainActivity.password);
+                scrActivity.email = emailText.getText().toString();
+                scrActivity.password = passwordText.getText().toString();
+                scrActivity.signIn(scrActivity.email, scrActivity.password);
 
-                mainActivity.saveConf();
+                scrActivity.saveConf();
 
                 Navigation.findNavController(v).navigate(R.id.navigation_feed);
 
@@ -87,12 +88,12 @@ public class ProfileFragment extends Fragment {
         else {
             logoutButton.setOnClickListener(v -> {
 
-                mainActivity.email = "null";
-                mainActivity.password = "null";
-                mainActivity.saveConf();
+                scrActivity.email = "null";
+                scrActivity.password = "null";
+                scrActivity.saveConf();
 
                 FirebaseAuth.getInstance().signOut();
-                mainActivity.isAuth = false;
+                scrActivity.isAuth = false;
 
                 Navigation.findNavController(v).navigate(R.id.navigation_feed);
             });
