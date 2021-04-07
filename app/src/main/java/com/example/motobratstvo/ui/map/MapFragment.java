@@ -1,27 +1,19 @@
 package com.example.motobratstvo.ui.map;
 
-import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import com.example.motobratstvo.R;
-import com.example.motobratstvo.ui.RegistrationActivity;
 import com.yandex.mapkit.Animation;
 import com.yandex.mapkit.MapKitFactory;
 import com.yandex.mapkit.geometry.Point;
 import com.yandex.mapkit.map.CameraPosition;
-
-import com.yandex.mapkit.map.MapWindow;
 import com.yandex.mapkit.mapview.MapView;
-import com.yandex.mapkit.search.search_layer.SearchLayer;
 import com.yandex.mapkit.traffic.TrafficLayer;
 import com.yandex.mapkit.traffic.TrafficLevel;
 import com.yandex.mapkit.traffic.TrafficListener;
@@ -32,16 +24,12 @@ public class MapFragment extends Fragment implements TrafficListener{
     private TextView levelText;
     private ImageButton levelIcon;
     private TrafficLevel trafficLevel = null;
-    private enum TrafficFreshness {Loading, OK, Expired};
+    private enum TrafficFreshness {Loading, OK, Expired}
+
     private TrafficFreshness trafficFreshness;
     private MapView mapView;
     private TrafficLayer traffic;
 
-
-
-    public static Fragment newInstance() {
-        return new MapFragment();
-    }
 
     @Override public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,9 +46,7 @@ public class MapFragment extends Fragment implements TrafficListener{
 
         levelText = v.findViewById(R.id.traffic_light_text);
         levelIcon = v.findViewById(R.id.traffic_light);
-        levelIcon.setOnClickListener(view -> {
-            onLightClick(view);
-        });
+        levelIcon.setOnClickListener(this::onLightClick);
         traffic = MapKitFactory.getInstance().createTrafficLayer(mapView.getMapWindow());
         traffic.setTrafficVisible(true);
         traffic.addTrafficListener(this);
