@@ -18,6 +18,7 @@ import com.example.motobratstvo.R;
 import com.example.motobratstvo.ScrActivity.ScrActivity;
 import com.example.motobratstvo.ui.RegistrationActivity;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -77,11 +78,8 @@ public class ProfileFragment extends Fragment {
 
                 scrActivity.email = emailText.getText().toString();
                 scrActivity.password = passwordText.getText().toString();
-                scrActivity.signIn(scrActivity.email, scrActivity.password);
-
                 scrActivity.saveConf();
-
-                Navigation.findNavController(v).navigate(R.id.navigation_feed);
+                scrActivity.signInSecond(scrActivity.email, scrActivity.password);
 
             });
         }

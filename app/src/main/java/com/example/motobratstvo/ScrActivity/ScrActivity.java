@@ -61,8 +61,6 @@ public class ScrActivity extends AppCompatActivity {
         }
         if(!(email == "null" && password == "null")) signIn(email, password);
 
-        MapKitFactory.setApiKey("0f07d937-a358-4269-836d-33d9285feea5");
-        MapKitFactory.initialize(this);
 
         setContentView(R.layout.activity_main);
 
@@ -144,9 +142,29 @@ public class ScrActivity extends AppCompatActivity {
                         Log.d(TAG, "signInWithEmail:success");
                         FirebaseUser user = mAuth.getCurrentUser();
                         updateUI(user);
+                    } else {
+                        isAuth = false;
+                        // If sign in fails, display a message to the user.
+                        Log.w(TAG, "signInWithEmail:failure", task.getException());
+                        Toast.makeText(com.example.motobratstvo.ScrActivity.ScrActivity.this, "Authentication failed.",
+                                Toast.LENGTH_SHORT).show();
+                        updateUI(null);
+                    }
+                });
+        // [END sign_in_with_email]
+    }
 
-
-
+    public void signInSecond(String email, String password) {
+        // [START sign_in_with_email]
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        isAuth = true;
+                        // Sign in success, update UI with the signed-in user's information
+                        Log.d(TAG, "signInWithEmail:success");
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        updateUI(user);
+                        restart();
                     } else {
                         isAuth = false;
                         // If sign in fails, display a message to the user.
@@ -180,6 +198,11 @@ public class ScrActivity extends AppCompatActivity {
         editor.putString(APP_PREFERENCES_EMAIL, email);
         editor.putString(APP_PREFERENCES_PASSWORD, password);
         editor.apply();
+    }
+
+    public void restart() {
+
+        super.finish();
     }
 /*
     @Override
