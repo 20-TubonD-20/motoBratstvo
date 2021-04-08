@@ -11,10 +11,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
+
 import com.example.motobratstvo.R;
 import com.example.motobratstvo.ScrActivity.ScrActivity;
 import com.example.motobratstvo.checker.StringChecker;
+import com.example.motobratstvo.ui.EditFeedActivity;
 import com.example.motobratstvo.ui.RegistrationActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -25,7 +26,7 @@ public class ProfileFragment extends Fragment {
 
     private TextView emailText, passwordText, nameText, textRules;
     private ImageView avatar;
-    private Button loginButton, logoutButton, registerButton;
+    private Button loginButton, logoutButton, registerButton, addPost;
 
     @Override public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,16 +45,16 @@ public class ProfileFragment extends Fragment {
             nameText = view.findViewById(R.id.textNameAuth);
             avatar = view.findViewById(R.id.imageAvatar);
             logoutButton = view.findViewById(R.id.logOut);
-
+            addPost = view.findViewById(R.id.buttonAddPost);
             avatar.setImageResource(R.drawable.icon);
 
         }
         else {
             view = inflater.inflate(R.layout.fragment_profile_not_auth, container, false);
-            emailText = view.findViewById(R.id.editTextEmailAddress);
-            passwordText = view.findViewById(R.id.editTextPassword);
-            loginButton = view.findViewById(R.id.buttonLogin);
-            registerButton = view.findViewById(R.id.buttonRegister);
+            emailText = view.findViewById(R.id.editTextWriteTitle);
+            passwordText = view.findViewById(R.id.editTextWriteText);
+            loginButton = view.findViewById(R.id.buttonSubmit);
+            registerButton = view.findViewById(R.id.buttonBackEdit);
         }
         return view;
     }
@@ -110,6 +111,10 @@ public class ProfileFragment extends Fragment {
                 scrActivity.isAuth = false;
 
                 scrActivity.restart();
+            });
+            addPost.setOnClickListener(v -> {
+                Intent intent = new Intent(scrActivity, EditFeedActivity.class);
+                startActivity(intent);
             });
         }
     }

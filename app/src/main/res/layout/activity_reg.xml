@@ -8,7 +8,7 @@
     android:background="@color/styleBlack">
 
     <TextView
-        android:id="@+id/textEmailNotAuth"
+        android:id="@+id/textWriteTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="177dp"
@@ -18,13 +18,13 @@
         android:layout_marginRight="177dp"
         android:text="Email:"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/editTextEmailAddress"
+        app:layout_constraintBottom_toTopOf="@+id/editTextWriteTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textPasswordNotAuth"
+        android:id="@+id/textWriteText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="177dp"
@@ -34,13 +34,13 @@
         android:layout_marginRight="177dp"
         android:text="Password:"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/editTextPassword"
+        app:layout_constraintBottom_toTopOf="@+id/editTextWriteText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextEmailAddress" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextWriteTitle" />
 
     <EditText
-        android:id="@+id/editTextPassword"
+        android:id="@+id/editTextWriteText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
@@ -51,14 +51,14 @@
         android:ems="10"
         android:inputType="textPassword"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/buttonLogin"
+        app:layout_constraintBottom_toTopOf="@+id/buttonSubmit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textPasswordNotAuth" />
+        app:layout_constraintTop_toBottomOf="@+id/textWriteText" />
 
     <EditText
-        android:id="@+id/editTextEmailAddress"
+        android:id="@+id/editTextWriteTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
@@ -69,14 +69,14 @@
         android:ems="10"
         android:inputType="textEmailAddress"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/textPasswordNotAuth"
+        app:layout_constraintBottom_toTopOf="@+id/textWriteText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textEmailNotAuth" />
+        app:layout_constraintTop_toBottomOf="@+id/textWriteTitle" />
 
     <Button
-        android:id="@+id/buttonLogin"
+        android:id="@+id/buttonSubmit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="160dp"
@@ -86,13 +86,13 @@
         android:layout_marginRight="159dp"
         android:text="Register"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/buttonRegister"
+        app:layout_constraintBottom_toTopOf="@+id/buttonBackEdit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextWriteText" />
 
     <Button
-        android:id="@+id/buttonRegister"
+        android:id="@+id/buttonBackEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="160dp"
@@ -106,5 +106,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonLogin" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonSubmit" />
 </androidx.constraintlayout.widget.ConstraintLayout>

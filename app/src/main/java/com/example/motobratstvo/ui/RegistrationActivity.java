@@ -27,12 +27,12 @@ public class RegistrationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reg);
 
-        emailTextEnter = findViewById(R.id.editTextEmailAddress);
-        passwordTextEnter = findViewById(R.id.editTextPassword);
-        passwordText = findViewById(R.id.textPasswordNotAuth);
-        emailText = findViewById(R.id.textEmailNotAuth);
-        regButton = findViewById(R.id.buttonLogin);
-        backButton = findViewById(R.id.buttonRegister);
+        emailTextEnter = findViewById(R.id.editTextWriteTitle);
+        passwordTextEnter = findViewById(R.id.editTextWriteText);
+        passwordText = findViewById(R.id.textWriteText);
+        emailText = findViewById(R.id.textWriteTitle);
+        regButton = findViewById(R.id.buttonSubmit);
+        backButton = findViewById(R.id.buttonBackEdit);
 
 
     }

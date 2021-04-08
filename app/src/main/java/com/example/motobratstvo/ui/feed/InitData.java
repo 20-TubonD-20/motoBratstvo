@@ -16,8 +16,10 @@ public class InitData {
 
     private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("/news");
     public ArrayList<News> news = new ArrayList<News>();
-    String buffTitle, buffText = new String();
+    String buffTitle, buffText, buffText2 = new String();
+    public int lastId;
     int count = 1;
+
 
     public void initData() {
             mDatabase.child(Integer.toString(count)).child("title").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
@@ -55,6 +57,29 @@ public class InitData {
         count+=1;
         if(count > 10000) count = 1;
     }
+
+    public void initLastId() {
+        mDatabase.child("lastId").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e("firebase", "Error getting data", task.getException());
+                } else {
+                    if(buffText2 != null && buffText2 != "null" ) {
+                        buffText2 = String.valueOf(task.getResult().getValue());
+                        lastId = Integer.parseInt(buffText2);
+                    }
+
+                    Log.d("firebaseBT2", buffText2);
+                }
+            }
+        });
+    }
+
+    public int getLastId(){
+        return lastId;
+    }
+
 
     public ArrayList<News> getNews(){
         return news;

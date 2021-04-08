@@ -11,6 +11,9 @@ import com.example.motobratstvo.ui.feed.News;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -24,6 +27,7 @@ public class ScrActivity extends AppCompatActivity {
 
     private static final String TAG = "EmailPassword";
     public static FirebaseAuth mAuth;
+    public static DatabaseReference mDatabase;
     public String email = "null", password = "null";
     public boolean isAuth = false;
 
@@ -35,7 +39,7 @@ public class ScrActivity extends AppCompatActivity {
     SharedPreferences mSettings;
 
 
-    InitData initData = new InitData();
+    public static InitData initData = new InitData();
     public ArrayList<News> data;
 
     @Override
@@ -45,6 +49,8 @@ public class ScrActivity extends AppCompatActivity {
         for (int i = 0; i < 10; i++) {
             initData.initData();
         }
+
+        initData.initLastId();
 
         mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
 
@@ -64,6 +70,7 @@ public class ScrActivity extends AppCompatActivity {
         }
         if(!(email.equals("null") && password.equals("null"))) signIn(email, password);
 
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         setContentView(R.layout.activity_main);
 
@@ -143,4 +150,5 @@ public class ScrActivity extends AppCompatActivity {
     public void refreshData(){
         data = initData.getNews();
     }
+
 }
