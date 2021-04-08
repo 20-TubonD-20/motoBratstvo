@@ -25,8 +25,11 @@ import java.util.Collections;
 
 public class FeedFragment extends Fragment {
     private  ArrayList<News> news = new ArrayList<News>();
+
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+
 
         View root = inflater.inflate(R.layout.fragment_feed, container, false);
 
@@ -34,17 +37,8 @@ public class FeedFragment extends Fragment {
         // начальная инициализация списка
         setInitialData();
         System.out.println(news.size());
-        if(news.size() != 0) {
-            System.out.println(news.get(0).getTitle());
-            System.out.println(news.get(0).getText());
-        }
 
-        if(news.size() > 0 )
-            if(news.get(0).getId() == 1) Collections.reverse(news);
 
-        System.out.println("string");
-        System.out.println(news.get(0).getId());
-        System.out.println(news.get(0).getTitle());
 
         // создаем адаптер
         RecyclerViewAdapter adapter = new RecyclerViewAdapter((Context) getActivity(), news);

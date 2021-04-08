@@ -12,6 +12,7 @@ import com.example.motobratstvo.R;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Collections;
 import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
@@ -20,6 +21,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private final List<News> news;
 
     RecyclerViewAdapter(Context context, List<News> news) {
+        Collections.reverse(news);
         this.news = news;
         this.inflater = LayoutInflater.from(context);
     }

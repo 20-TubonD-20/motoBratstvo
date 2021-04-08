@@ -48,14 +48,15 @@ public class InitData {
                     } else {
                         buffText = String.valueOf(task.getResult().getValue());
                         Log.d("firebase", buffText);
-                        if(buffTitle != "null")
+                        if(buffTitle != "null") {
                             news.add(new News(buffTitle, buffText, count_));
+                        }
 
                     }
                 }
             });
-        count+=1;
-        if(count > 10000) count = 1;
+            count++;
+        if(count > 100000) count = 2;
     }
 
     public void initLastId() {
@@ -83,5 +84,9 @@ public class InitData {
 
     public ArrayList<News> getNews(){
         return news;
+    }
+
+    public void refreshCount(){
+        count = news.size() + 1;
     }
 }

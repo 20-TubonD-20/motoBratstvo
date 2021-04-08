@@ -46,9 +46,6 @@ public class ScrActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        for (int i = 0; i < 10; i++) {
-            initData.initData();
-        }
 
         initData.initLastId();
 
@@ -147,7 +144,18 @@ public class ScrActivity extends AppCompatActivity {
         editor.putString(APP_PREFERENCES_PASSWORD, password);
         editor.apply();
     }
+
+
+    public void addNews() {
+        for (int i = 0; i < 1000; i++) {
+            initData.initData();
+        }
+    }
     public void refreshData(){
+        initData.refreshCount();
+        for (int i = 0; i < 100; i++) {
+            initData.initData();
+        }
         data = initData.getNews();
     }
 
