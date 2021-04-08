@@ -109,7 +109,7 @@ public class ProfileFragment extends Fragment {
                 FirebaseAuth.getInstance().signOut();
                 scrActivity.isAuth = false;
 
-                Navigation.findNavController(v).navigate(R.id.navigation_feed);
+                scrActivity.restart();
             });
         }
     }

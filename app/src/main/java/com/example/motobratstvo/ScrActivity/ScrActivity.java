@@ -18,6 +18,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class ScrActivity extends AppCompatActivity {
 
@@ -41,11 +42,6 @@ public class ScrActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-/*        SharedPreferences.Editor editor = mSettings.edit();
-        editor.putString(APP_PREFERENCES_EMAIL, email);
-        editor.putString(APP_PREFERENCES_PASSWORD, password);
-        editor.apply();
-*/
         for (int i = 0; i < 10; i++) {
             initData.initData();
         }
@@ -90,30 +86,8 @@ public class ScrActivity extends AppCompatActivity {
 
     }
 
-/*    public void createAccount(String email, String password) {
-        // [START create_user_with_email]
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, task -> {
-                    if (task.isSuccessful()) {
-                        // Sign in success, update UI with the signed-in user's information
-                        isAuth = true;
-                        Log.d(TAG, "createUserWithEmail:success");
-                        FirebaseUser user = mAuth.getCurrentUser();
-                        updateUI(user);
-                    } else {
-                        // If sign in fails, display a message to the user.
-                        isAuth = false;
-                        Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                        Toast.makeText(MainActivity.this, "Authentication failed.",
-                                Toast.LENGTH_SHORT).show();
-                        updateUI(null);
-                    }
-                });
-        // [END create_user_with_email]
-    }*/
 
     public void signIn(String email, String password) {
-        // [START sign_in_with_email]
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
@@ -129,11 +103,9 @@ public class ScrActivity extends AppCompatActivity {
                                 Toast.LENGTH_SHORT).show();
                     }
                 });
-        // [END sign_in_with_email]
     }
 
     public void signInSecond(String email, String password) {
-        // [START sign_in_with_email]
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
@@ -150,20 +122,11 @@ public class ScrActivity extends AppCompatActivity {
                                 Toast.LENGTH_SHORT).show();
                     }
                 });
-        // [END sign_in_with_email]
     }
 
-/*    public void sendEmailVerification() {
-        // Send verification email
-        // [START send_email_verification]
-        final FirebaseUser user = mAuth.getCurrentUser();
-        assert user != null;
-        user.sendEmailVerification()
-                .addOnCompleteListener(this, task -> {
-                    // Email sent
-                });
-        // [END send_email_verification]
-    }*/
+    public void restart(){
+        finish();
+    }
 
     public void reload() { }
 
@@ -177,13 +140,6 @@ public class ScrActivity extends AppCompatActivity {
         editor.putString(APP_PREFERENCES_PASSWORD, password);
         editor.apply();
     }
-/*
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        NavigationUI.onNavDestinationSelected(item, navController);
-        return super.onOptionsItemSelected(item);
-    }
-*/
     public void refreshData(){
         data = initData.getNews();
     }

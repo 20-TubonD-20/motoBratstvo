@@ -13,6 +13,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 
 public class InitData {
+
     private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("/news");
     public ArrayList<News> news = new ArrayList<News>();
     String buffTitle, buffText = new String();
@@ -20,6 +21,8 @@ public class InitData {
 
     public void initData() {
             mDatabase.child(Integer.toString(count)).child("title").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+
+
                 @Override
                 public void onComplete(@NonNull Task<DataSnapshot> task) {
                     if (!task.isSuccessful()) {
@@ -34,6 +37,7 @@ public class InitData {
             });
 
             mDatabase.child(Integer.toString(count)).child("text").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                int count_ = count;
                 @Override
                 public void onComplete(@NonNull Task<DataSnapshot> task) {
                     if (!task.isSuccessful()) {
@@ -43,7 +47,7 @@ public class InitData {
                         buffText = String.valueOf(task.getResult().getValue());
                         Log.d("firebase", buffText);
                         if(buffTitle != "null")
-                            news.add(new News(buffTitle, buffText));
+                            news.add(new News(buffTitle, buffText, count_));
 
                     }
                 }
@@ -51,38 +55,6 @@ public class InitData {
         count+=1;
         if(count > 10000) count = 1;
     }
-
-    public void initDataOnce() {
-
-            mDatabase.child(Integer.toString(1)).child("title").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DataSnapshot> task) {
-                    if (!task.isSuccessful()) {
-                        Log.e("firebase", "Error getting data", task.getException());
-                        buffTitle = "null";
-                    } else {
-                        buffTitle = String.valueOf(task.getResult().getValue());
-                        Log.d("firebase", buffTitle);
-
-                    }
-                }
-            });
-
-            mDatabase.child(Integer.toString(1)).child("text").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DataSnapshot> task) {
-                    if (!task.isSuccessful()) {
-                        Log.e("firebase", "Error getting data", task.getException());
-                        buffText = "null";
-                    } else {
-                        buffText = String.valueOf(task.getResult().getValue());
-                        Log.d("firebase", buffText);
-                        news.add(new News(buffTitle, buffText));
-
-                    }
-                }
-            });
-        }
 
     public ArrayList<News> getNews(){
         return news;
