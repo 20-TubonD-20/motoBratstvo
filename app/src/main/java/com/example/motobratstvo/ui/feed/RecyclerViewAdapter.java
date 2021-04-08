@@ -21,7 +21,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private final List<News> news;
 
     RecyclerViewAdapter(Context context, List<News> news) {
-        Collections.reverse(news);
+//        Collections.reverse(news);
         this.news = news;
         this.inflater = LayoutInflater.from(context);
     }

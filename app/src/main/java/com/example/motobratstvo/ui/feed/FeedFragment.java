@@ -25,17 +25,16 @@ import java.util.Collections;
 
 public class FeedFragment extends Fragment {
     private  ArrayList<News> news = new ArrayList<News>();
-
+    public static InitData initData_ = new InitData();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-
-
+        addNews();
+        setInitialData();
         View root = inflater.inflate(R.layout.fragment_feed, container, false);
 
         RecyclerView recView = root.findViewById(R.id.list);
         // начальная инициализация списка
-        setInitialData();
         System.out.println(news.size());
 
 
@@ -49,9 +48,13 @@ public class FeedFragment extends Fragment {
     }
 
     public void setInitialData(){
-        ScrActivity scrActivity = (ScrActivity) getActivity();
-        scrActivity.refreshData();
-        news = scrActivity.data;
+        news = initData_.getNews();
     }
+    public void addNews() {
+        for (int i = 0; i < 1000; i++) {
+            initData_.initData();
+        }
+    }
+
 
 }

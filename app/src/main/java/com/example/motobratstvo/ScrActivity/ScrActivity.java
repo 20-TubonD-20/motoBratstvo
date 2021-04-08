@@ -146,11 +146,6 @@ public class ScrActivity extends AppCompatActivity {
     }
 
 
-    public void addNews() {
-        for (int i = 0; i < 1000; i++) {
-            initData.initData();
-        }
-    }
     public void refreshData(){
         initData.refreshCount();
         for (int i = 0; i < 100; i++) {
