@@ -27,7 +27,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
-    <TextView
+ <!--   <TextView
         android:id="@+id/traffic_light_text"
         android:textColor="@color/styleBlack"
         android:layout_width="wrap_content"
@@ -38,7 +38,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints" />  -->
 
     <LinearLayout
         android:layout_width="match_parent"

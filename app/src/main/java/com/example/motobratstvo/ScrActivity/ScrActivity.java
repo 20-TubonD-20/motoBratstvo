@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 import com.example.motobratstvo.R;
+import com.example.motobratstvo.ui.feed.InitData;
+import com.example.motobratstvo.ui.feed.News;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -14,6 +16,8 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+
+import java.util.ArrayList;
 
 public class ScrActivity extends AppCompatActivity {
 
@@ -29,6 +33,10 @@ public class ScrActivity extends AppCompatActivity {
     public static String APP_PREFERENCES_PASSWORD = "password";
     SharedPreferences mSettings;
 
+
+    InitData initData = new InitData();
+    public ArrayList<News> data;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +46,7 @@ public class ScrActivity extends AppCompatActivity {
         editor.putString(APP_PREFERENCES_PASSWORD, password);
         editor.apply();
 */
-
+        initData.initDataOnce();
         mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
 
 
@@ -69,35 +77,8 @@ public class ScrActivity extends AppCompatActivity {
         navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
-        //????
 
 
-/*
-
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("userAuntefication/id_1");
-
-        myRef.setValue("qwerty123");
-        // Read from the database
-        myRef.addValueEventListener(new ValueEventListener() {
-            private static final String TAG = "AAA";
-
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                String value = dataSnapshot.getValue(String.class);
-                Log.d(TAG, "Value is: " + value);
-            }
-
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w(TAG, "Failed to read value.", error.toException());
-            }
-        });
-        */
     }
 
     @Override
@@ -200,4 +181,7 @@ public class ScrActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 */
+    public void refreshData(){
+        data = initData.getNews();
+    }
 }

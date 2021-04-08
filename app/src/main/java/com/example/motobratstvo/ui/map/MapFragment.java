@@ -93,7 +93,7 @@ public class MapFragment extends Fragment implements TrafficListener, Session.Se
         });
 
 
-        levelText = v.findViewById(R.id.traffic_light_text);
+//        levelText = v.findViewById(R.id.traffic_light_text);
         levelIcon = v.findViewById(R.id.traffic_light);
         levelIcon.setOnClickListener(this::onLightClick);
         traffic = MapKitFactory.getInstance().createTrafficLayer(mapView.getMapWindow());
@@ -140,7 +140,7 @@ public class MapFragment extends Fragment implements TrafficListener, Session.Se
             level = Integer.toString(trafficLevel.getLevel());
         }
         levelIcon.setImageBitmap(BitmapFactory.decodeResource(getResources(), iconId));
-        levelText.setText(level);
+//        levelText.setText(level);
     }
 
     public void onLightClick(View view) {
