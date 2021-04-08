@@ -41,8 +41,12 @@ public class ProfileFragment extends Fragment {
         if(scrActivity.isAuth) {
             view = inflater.inflate(R.layout.fragment_profile_auth, container, false);
             emailText = view.findViewById(R.id.textEmailAuth);
+            emailText.setText(scrActivity.email);
+
             textRules = view.findViewById(R.id.textRules);
             nameText = view.findViewById(R.id.textNameAuth);
+            nameText.setText(scrActivity.email);
+
             avatar = view.findViewById(R.id.imageAvatar);
             logoutButton = view.findViewById(R.id.logOut);
             addPost = view.findViewById(R.id.buttonAddPost);
