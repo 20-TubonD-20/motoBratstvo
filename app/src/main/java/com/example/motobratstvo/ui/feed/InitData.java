@@ -16,19 +16,15 @@ public class InitData {
     private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("/news");
     public ArrayList<News> news = new ArrayList<News>();
     String buffTitle, buffText = new String();
-    boolean flag = true;
+    int count = 1;
 
-
-/*    public void initData() {
-        for (int i = 1; i < 100000; i++) {
-
-            mDatabase.child(Integer.toString(i)).child("title").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+    public void initData() {
+            mDatabase.child(Integer.toString(count)).child("title").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DataSnapshot> task) {
                     if (!task.isSuccessful()) {
                         Log.e("firebase", "Error getting data", task.getException());
                         buffTitle = "null";
-                        flag = false;
                     } else {
                         buffTitle = String.valueOf(task.getResult().getValue());
                         Log.d("firebase", buffTitle);
@@ -37,27 +33,25 @@ public class InitData {
                 }
             });
 
-            mDatabase.child(Integer.toString(i)).child("text").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            mDatabase.child(Integer.toString(count)).child("text").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DataSnapshot> task) {
                     if (!task.isSuccessful()) {
                         Log.e("firebase", "Error getting data", task.getException());
                         buffText = "null";
-                        flag = false;
                     } else {
                         buffText = String.valueOf(task.getResult().getValue());
                         Log.d("firebase", buffText);
+                        if(buffTitle != "null")
+                            news.add(new News(buffTitle, buffText));
 
                     }
                 }
             });
-
-            if(!flag) break;
-
-            news.add(new News(buffTitle, buffText));
-        }
+        count+=1;
+        if(count > 10000) count = 1;
     }
-*/
+
     public void initDataOnce() {
 
             mDatabase.child(Integer.toString(1)).child("title").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {

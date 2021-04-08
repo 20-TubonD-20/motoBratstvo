@@ -46,7 +46,10 @@ public class ScrActivity extends AppCompatActivity {
         editor.putString(APP_PREFERENCES_PASSWORD, password);
         editor.apply();
 */
-        initData.initDataOnce();
+        for (int i = 0; i < 10; i++) {
+            initData.initData();
+        }
+
         mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
 
 
