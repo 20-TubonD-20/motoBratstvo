@@ -7,7 +7,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.motobratstvo.R;
-import com.example.motobratstvo.scrActivity.ScrActivity;
+import com.example.motobratstvo.srcActivity.SrcActivity;
 import com.example.motobratstvo.checker.StringChecker;
 
 public class EditFeedActivity extends AppCompatActivity {
@@ -43,17 +43,17 @@ public class EditFeedActivity extends AppCompatActivity {
             textBuff = editText.getText().toString();
 
             if(titleBuff != "" && textBuff!= "") {
-                    ScrActivity.mDatabase.child("news")
-                            .child(Integer.toString(ScrActivity.initData.getLastId() + 1))
+                    SrcActivity.mDatabase.child("news")
+                            .child(Integer.toString(SrcActivity.initData.getLastId() + 1))
                             .child("title").setValue(titleBuff);
-                    ScrActivity.mDatabase.child("news")
-                            .child(Integer.toString(ScrActivity.initData.getLastId() + 1))
+                    SrcActivity.mDatabase.child("news")
+                            .child(Integer.toString(SrcActivity.initData.getLastId() + 1))
                             .child("text").setValue(textBuff);
 
-                    ScrActivity.initData.lastId++;
+                    SrcActivity.initData.lastId++;
 
-                ScrActivity.mDatabase.child("news")
-                        .child("lastId").setValue(Integer.toString(ScrActivity.initData.lastId));
+                SrcActivity.mDatabase.child("news")
+                        .child("lastId").setValue(Integer.toString(SrcActivity.initData.lastId));
 
                     Toast.makeText(EditFeedActivity.this, "Posted",
                             Toast.LENGTH_SHORT).show();

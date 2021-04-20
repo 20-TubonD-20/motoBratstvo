@@ -10,7 +10,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.motobratstvo.R;
-import com.example.motobratstvo.scrActivity.ScrActivity;
+import com.example.motobratstvo.srcActivity.SrcActivity;
 import com.example.motobratstvo.checker.StringChecker;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -59,7 +59,7 @@ public class RegistrationActivity extends AppCompatActivity {
             }
             else {
 
-                ScrActivity.mAuth.createUserWithEmailAndPassword(emailBuff, passwordBuff)
+                SrcActivity.mAuth.createUserWithEmailAndPassword(emailBuff, passwordBuff)
                         .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {

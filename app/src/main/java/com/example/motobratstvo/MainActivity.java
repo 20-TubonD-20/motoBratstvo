@@ -2,7 +2,7 @@ package com.example.motobratstvo;
 
 import android.content.Intent;
 import android.os.Bundle;
-import com.example.motobratstvo.scrActivity.ScrActivity;
+import com.example.motobratstvo.srcActivity.SrcActivity;
 import com.yandex.mapkit.MapKitFactory;
 import com.yandex.mapkit.search.SearchFactory;
 
@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
 
-        Intent intent = new Intent(MainActivity.this, ScrActivity.class);
+        Intent intent = new Intent(MainActivity.this, SrcActivity.class);
         startActivity(intent);
 
     }

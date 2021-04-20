@@ -13,7 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import com.example.motobratstvo.R;
-import com.example.motobratstvo.scrActivity.ScrActivity;
+import com.example.motobratstvo.srcActivity.SrcActivity;
 import com.yandex.mapkit.Animation;
 import com.yandex.mapkit.GeoObjectCollection;
 import com.yandex.mapkit.MapKitFactory;
@@ -177,7 +177,7 @@ public class MapFragment extends Fragment implements TrafficListener, Session.Se
             if (resultLocation != null) {
                 mapObjects.addPlacemark(
                         resultLocation,
-                        ImageProvider.fromResource((ScrActivity) getActivity(), R.drawable.search_result));
+                        ImageProvider.fromResource((SrcActivity) getActivity(), R.drawable.search_result));
             }
         }
     }
@@ -192,7 +192,7 @@ public class MapFragment extends Fragment implements TrafficListener, Session.Se
             errorMessage = getString(R.string.network_error_message);
         }
 
-        Toast.makeText((ScrActivity )getActivity(), errorMessage, Toast.LENGTH_SHORT).show();
+        Toast.makeText((SrcActivity)getActivity(), errorMessage, Toast.LENGTH_SHORT).show();
     }
 
     @Override

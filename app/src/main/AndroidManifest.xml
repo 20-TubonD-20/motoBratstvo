@@ -23,7 +23,7 @@
         <activity android:name=".ui.RegistrationActivity">
             android:screenOrientation="portrait"
         </activity>
-        <activity android:name=".scrActivity.ScrActivity">
+        <activity android:name=".srcActivity.SrcActivity">
             android:screenOrientation="portrait"
         </activity>
         <activity android:name=".ui.EditFeedActivity">

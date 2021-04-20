@@ -1,4 +1,4 @@
-package com.example.motobratstvo.scrActivity;
+package com.example.motobratstvo.srcActivity;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -22,7 +22,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import java.util.ArrayList;
 
-public class ScrActivity extends AppCompatActivity {
+public class SrcActivity extends AppCompatActivity {
 
     private static final String TAG = "EmailPassword";
     public static FirebaseAuth mAuth;
@@ -102,7 +102,7 @@ public class ScrActivity extends AppCompatActivity {
                         isAuth = false;
                         // If sign in fails, display a message to the user.
                         Log.w(TAG, "signInWithEmail:failure", task.getException());
-                        Toast.makeText(com.example.motobratstvo.scrActivity.ScrActivity.this, "Authentication failed.",
+                        Toast.makeText(SrcActivity.this, "Authentication failed.",
                                 Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -121,7 +121,7 @@ public class ScrActivity extends AppCompatActivity {
                         isAuth = false;
                         // If sign in fails, display a message to the user.
                         Log.w(TAG, "signInWithEmail:failure", task.getException());
-                        Toast.makeText(com.example.motobratstvo.scrActivity.ScrActivity.this, "Authentication failed.",
+                        Toast.makeText(SrcActivity.this, "Authentication failed.",
                                 Toast.LENGTH_SHORT).show();
                     }
                 });

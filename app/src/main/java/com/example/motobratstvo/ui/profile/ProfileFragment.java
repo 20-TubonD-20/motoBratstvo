@@ -13,7 +13,7 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 
 import com.example.motobratstvo.R;
-import com.example.motobratstvo.scrActivity.ScrActivity;
+import com.example.motobratstvo.srcActivity.SrcActivity;
 import com.example.motobratstvo.checker.StringChecker;
 import com.example.motobratstvo.ui.EditFeedActivity;
 import com.example.motobratstvo.ui.RegistrationActivity;
@@ -36,7 +36,7 @@ public class ProfileFragment extends Fragment {
 
     @Override public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view;
-        ScrActivity scrActivity = (ScrActivity)getContext();
+        SrcActivity scrActivity = (SrcActivity)getContext();
         assert scrActivity != null;
         if(scrActivity.isAuth) {
             view = inflater.inflate(R.layout.fragment_profile_auth, container, false);
@@ -65,7 +65,7 @@ public class ProfileFragment extends Fragment {
 
     @Override public void onStart() {
         super.onStart();
-        ScrActivity scrActivity = (ScrActivity) getContext();
+        SrcActivity scrActivity = (SrcActivity) getContext();
 
         assert scrActivity != null;
         if(!scrActivity.isAuth) {
@@ -87,12 +87,12 @@ public class ProfileFragment extends Fragment {
                 passwordBuff = passwordText.getText().toString();
 
                 if(stringChecker.checkPassword(passwordBuff) == 1) {
-                    Toast.makeText((ScrActivity) getActivity(), "Error: must be > 5 syms",
+                    Toast.makeText((SrcActivity) getActivity(), "Error: must be > 5 syms",
                             Toast.LENGTH_SHORT).show();
                 }
 
                 else if(stringChecker.checkEmail(emailBuff) == 1) {
-                    Toast.makeText((ScrActivity) getActivity(), "Error: must be one @",
+                    Toast.makeText((SrcActivity) getActivity(), "Error: must be one @",
                             Toast.LENGTH_SHORT).show();
                 }
                 else {
