@@ -31,5 +31,14 @@
     <string name="network_error_message">Network error</string>
     <string name="remote_error_message">Remote server error</string>
     <string name="unknown_error_message">Unknown error</string>
-
+    <string name="title">Title:</string>
+    <string name="text">Text:</string>
+    <string name="publish">Publish</string>
+    <string name="back">Back</string>
+    <string name="email">Email:</string>
+    <string name="password">Password:</string>
+    <string name="register">Register</string>
+    <string name="name">Name:</string>
+    <string name="role">Role:</string>\
+    <string name="add_post">Add post</string>
 </resources>
