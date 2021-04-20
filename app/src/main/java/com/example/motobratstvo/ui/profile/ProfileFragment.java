@@ -13,7 +13,7 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 
 import com.example.motobratstvo.R;
-import com.example.motobratstvo.ScrActivity.ScrActivity;
+import com.example.motobratstvo.scrActivity.ScrActivity;
 import com.example.motobratstvo.checker.StringChecker;
 import com.example.motobratstvo.ui.EditFeedActivity;
 import com.example.motobratstvo.ui.RegistrationActivity;

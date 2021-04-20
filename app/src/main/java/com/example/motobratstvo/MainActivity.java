@@ -2,7 +2,7 @@ package com.example.motobratstvo;
 
 import android.content.Intent;
 import android.os.Bundle;
-import com.example.motobratstvo.ScrActivity.ScrActivity;
+import com.example.motobratstvo.scrActivity.ScrActivity;
 import com.yandex.mapkit.MapKitFactory;
 import com.yandex.mapkit.search.SearchFactory;
 

@@ -1,4 +1,4 @@
-package com.example.motobratstvo.ScrActivity;
+package com.example.motobratstvo.scrActivity;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -21,7 +21,6 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class ScrActivity extends AppCompatActivity {
 
@@ -103,7 +102,7 @@ public class ScrActivity extends AppCompatActivity {
                         isAuth = false;
                         // If sign in fails, display a message to the user.
                         Log.w(TAG, "signInWithEmail:failure", task.getException());
-                        Toast.makeText(com.example.motobratstvo.ScrActivity.ScrActivity.this, "Authentication failed.",
+                        Toast.makeText(com.example.motobratstvo.scrActivity.ScrActivity.this, "Authentication failed.",
                                 Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -122,7 +121,7 @@ public class ScrActivity extends AppCompatActivity {
                         isAuth = false;
                         // If sign in fails, display a message to the user.
                         Log.w(TAG, "signInWithEmail:failure", task.getException());
-                        Toast.makeText(com.example.motobratstvo.ScrActivity.ScrActivity.this, "Authentication failed.",
+                        Toast.makeText(com.example.motobratstvo.scrActivity.ScrActivity.this, "Authentication failed.",
                                 Toast.LENGTH_SHORT).show();
                     }
                 });

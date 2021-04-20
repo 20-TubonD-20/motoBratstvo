@@ -13,7 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import com.example.motobratstvo.R;
-import com.example.motobratstvo.ScrActivity.ScrActivity;
+import com.example.motobratstvo.scrActivity.ScrActivity;
 import com.yandex.mapkit.Animation;
 import com.yandex.mapkit.GeoObjectCollection;
 import com.yandex.mapkit.MapKitFactory;
