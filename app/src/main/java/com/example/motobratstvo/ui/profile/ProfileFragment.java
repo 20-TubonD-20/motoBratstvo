@@ -111,6 +111,7 @@ public class ProfileFragment extends Fragment {
 
                 scrActivity.email = "null";
                 scrActivity.password = "null";
+                scrActivity.role = "null";
                 scrActivity.saveConf();
 
                 FirebaseAuth.getInstance().signOut();
