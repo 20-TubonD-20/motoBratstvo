@@ -3,18 +3,15 @@ package com.example.motobratstvo.ui.feed;
 public class News {
     private String title;
     //private int image;
+    private String date;
     private String text;
     private int id;
 
-    public News(String title, String text, int id) {
+    public News(String title, String text, String date, int id) {
         this.title = title;
-    //    this.image = image;
         this.text = text;
+        this.date = date;
         this.id = id;
-    }
-    public News(String title, String text) {
-        this.title = title;
-        this.text = text;
     }
     public String getTitle() {
         return this.title;
@@ -22,6 +19,7 @@ public class News {
     public String getText() {
         return this.text;
     }
+    public String getDate() { return date; }
     public int getId() { return id; }
     public void setTitle(String title) {
         this.title = title;
@@ -30,4 +28,5 @@ public class News {
         this.text = text;
     }
     public void setId(int id) { this.id = id; }
+    public void setDate(String date) { this.date = date; }
 }

@@ -16,7 +16,7 @@ public class InitData {
 
     private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("/news");
     public ArrayList<News> news = new ArrayList<News>();
-    String buffTitle, buffText, buffText2 = new String();
+    String date, buffTitle, buffText, buffText2 = new String();
     public int lastId;
     int count = 1;
 
@@ -39,7 +39,6 @@ public class InitData {
             });
 
             mDatabase.child(Integer.toString(count)).child("text").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                int count_ = count;
                 @Override
                 public void onComplete(@NonNull Task<DataSnapshot> task) {
                     if (!task.isSuccessful()) {
@@ -48,13 +47,27 @@ public class InitData {
                     } else {
                         buffText = String.valueOf(task.getResult().getValue());
                         Log.d("firebase", buffText);
-                        if(buffTitle != "null") {
-                            news.add(new News(buffTitle, buffText, count_));
-                        }
-
                     }
                 }
             });
+
+        mDatabase.child(Integer.toString(count)).child("date").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            int count_ = count;
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e("firebase", "Error getting data", task.getException());
+                    date = "null";
+                } else {
+                    date = String.valueOf(task.getResult().getValue());
+                    Log.d("firebase", date);
+                    if(buffTitle != "null") {
+                        news.add(new News(buffTitle, buffText, date, count_));
+                    }
+
+                }
+            }
+        });
             count++;
         if(count > 100000) count = 2;
     }

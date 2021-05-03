@@ -15,7 +15,7 @@ import androidx.fragment.app.Fragment;
 import com.example.motobratstvo.R;
 import com.example.motobratstvo.srcActivity.SrcActivity;
 import com.example.motobratstvo.checker.StringChecker;
-import com.example.motobratstvo.ui.EditFeedActivity;
+import com.example.motobratstvo.ui.AddPostActivity;
 import com.example.motobratstvo.ui.RegistrationActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -117,7 +117,7 @@ public class ProfileFragment extends Fragment {
                 scrActivity.restart();
             });
             addPost.setOnClickListener(v -> {
-                Intent intent = new Intent(scrActivity, EditFeedActivity.class);
+                Intent intent = new Intent(scrActivity, AddPostActivity.class);
                 startActivity(intent);
             });
         }
