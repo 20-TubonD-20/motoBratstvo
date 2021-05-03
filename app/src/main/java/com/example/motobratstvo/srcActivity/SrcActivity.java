@@ -8,12 +8,16 @@ import android.widget.Toast;
 import com.example.motobratstvo.R;
 import com.example.motobratstvo.ui.feed.InitData;
 import com.example.motobratstvo.ui.feed.News;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -27,7 +31,7 @@ public class SrcActivity extends AppCompatActivity {
     private static final String TAG = "EmailPassword";
     public static FirebaseAuth mAuth;
     public static DatabaseReference mDatabase;
-    public String email = "null", password = "null";
+    public String email = "null", password = "null", role = "null";
     public boolean isAuth = false;
 
     public NavController navController;
@@ -35,6 +39,7 @@ public class SrcActivity extends AppCompatActivity {
     public static String APP_PREFERENCES = "usersettings";
     public static String APP_PREFERENCES_EMAIL = "email";
     public static String APP_PREFERENCES_PASSWORD = "password";
+    public static String APP_PREFERENCES_ROLE = "role";
     SharedPreferences mSettings;
 
 
@@ -57,6 +62,10 @@ public class SrcActivity extends AppCompatActivity {
         if(mSettings.contains(APP_PREFERENCES_PASSWORD)) {
             password = mSettings.getString(APP_PREFERENCES_PASSWORD, "null");
         }
+        if(mSettings.contains(APP_PREFERENCES_ROLE)) {
+            role = mSettings.getString(APP_PREFERENCES_ROLE, "null");
+        }
+
 
         mAuth = FirebaseAuth.getInstance();
         // Check if user is signed in (non-null) and update UI accordingly.
@@ -98,6 +107,31 @@ public class SrcActivity extends AppCompatActivity {
                         // Sign in success, update UI with the signed-in user's information
                         Log.d(TAG, "signInWithEmail:success");
                         FirebaseUser user = mAuth.getCurrentUser();
+
+                        String uid = user.getUid();
+                        mDatabase.child("users").child(uid).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                if (!task.isSuccessful()) {
+                                    Log.e("firebase", "Error getting data", task.getException());
+                                } else {
+                                    String buff = String.valueOf(task.getResult().getValue());
+                                    Log.d("firebase_users", buff);
+                                    if(buff == "null") {
+                                        mDatabase.child("users")
+                                                .child(uid).setValue("default");
+                                    }
+                                    else {
+                                        role = buff;
+                                        saveConf();
+                                    }
+
+                                }
+                            }
+                        });
+
+
+
                     } else {
                         isAuth = false;
                         // If sign in fails, display a message to the user.
@@ -116,6 +150,28 @@ public class SrcActivity extends AppCompatActivity {
                         // Sign in success, update UI with the signed-in user's information
                         Log.d(TAG, "signInWithEmail:success");
                         FirebaseUser user = mAuth.getCurrentUser();
+                        String uid = user.getUid();
+                        mDatabase.child("users").child(uid).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                if (!task.isSuccessful()) {
+                                    Log.e("firebase", "Error getting data", task.getException());
+                                //} else {
+                                    /*String buff = String.valueOf(task.getResult().getValue());
+                                    Log.d("firebase_users", buff);
+                                    if(buff == "null") {
+                                        mDatabase.child("users")
+                                                .child(uid).setValue("default");
+                                    }
+                                    else {
+                                        role = buff;
+                                        saveConf();
+                                    }*/
+
+                                }
+                            }
+                        });
+
                         updateUI(user);
                     } else {
                         isAuth = false;
@@ -141,6 +197,7 @@ public class SrcActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = mSettings.edit();
         editor.putString(APP_PREFERENCES_EMAIL, email);
         editor.putString(APP_PREFERENCES_PASSWORD, password);
+        editor.putString(APP_PREFERENCES_ROLE, role);
         editor.apply();
     }
 

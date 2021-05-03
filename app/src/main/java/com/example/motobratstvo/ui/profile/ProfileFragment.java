@@ -44,6 +44,7 @@ public class ProfileFragment extends Fragment {
             emailText.setText(scrActivity.email);
 
             textRules = view.findViewById(R.id.textRules);
+            textRules.setText(scrActivity.role);
             nameText = view.findViewById(R.id.textNameAuth);
             nameText.setText(scrActivity.email);
 
@@ -76,8 +77,8 @@ public class ProfileFragment extends Fragment {
             });
 
             loginButton.setOnClickListener(v -> {
-                Log.d("BUTTOM TEST", emailText.getText().toString());
-                Log.d("BUTTOM TEST", passwordText.getText().toString());
+                //Log.d("BUTTOM TEST", emailText.getText().toString());
+                //Log.d("BUTTOM TEST", passwordText.getText().toString());
 
                 StringChecker stringChecker = new StringChecker();
 
@@ -98,6 +99,7 @@ public class ProfileFragment extends Fragment {
                 else {
                     scrActivity.email = emailBuff;
                     scrActivity.password = passwordBuff;
+                    scrActivity.role = "null";
                     scrActivity.saveConf();
                     scrActivity.signInSecond(emailBuff, passwordBuff);
                 }
@@ -117,8 +119,15 @@ public class ProfileFragment extends Fragment {
                 scrActivity.restart();
             });
             addPost.setOnClickListener(v -> {
-                Intent intent = new Intent(scrActivity, AddPostActivity.class);
-                startActivity(intent);
+                SrcActivity scrActivityBuff = (SrcActivity) getContext();
+                if(scrActivityBuff.role.equals("admin")) {
+                    Intent intent = new Intent(scrActivity, AddPostActivity.class);
+                    startActivity(intent);
+                }
+                else {
+                    Toast.makeText((SrcActivity) getActivity(), "access denied",
+                            Toast.LENGTH_SHORT).show();
+                }
             });
         }
     }
