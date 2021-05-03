@@ -204,7 +204,7 @@ public class SrcActivity extends AppCompatActivity {
 
     public void refreshData(){
         initData.refreshCount();
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 1000; i++) {
             initData.initData();
         }
         data = initData.getNews();
