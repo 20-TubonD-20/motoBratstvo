@@ -1,5 +1,7 @@
 package com.example.motobratstvo.ui.feed;
 
+import java.math.BigInteger;
+
 public class News {
     private String title;
     //private int image;
@@ -13,6 +15,8 @@ public class News {
         this.date = date;
         this.id = id;
     }
+
+
     public String getTitle() {
         return this.title;
     }

@@ -50,13 +50,8 @@ public class AddPostActivity extends AppCompatActivity {
                 // Текущее время
                 Date currentDate = new Date();
                 // Форматирование времени как "день.месяц.год"
-                DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
+                DateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss", Locale.getDefault());
                 String dateText = dateFormat.format(currentDate);
-                // Форматирование времени как "часы:минуты:секунды"
-                DateFormat timeFormat = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
-                String timeText = timeFormat.format(currentDate);
-
-                String date_ = dateText + "|" + timeText;
 
 
                 SrcActivity.mDatabase.child("news")
@@ -67,7 +62,7 @@ public class AddPostActivity extends AppCompatActivity {
                         .child("text").setValue(textBuff);
                 SrcActivity.mDatabase.child("news")
                         .child(Integer.toString(SrcActivity.initData.getLastId() + 1))
-                        .child("date").setValue(date_);
+                        .child("date").setValue(dateText);
 
                 SrcActivity.initData.lastId++;
 
