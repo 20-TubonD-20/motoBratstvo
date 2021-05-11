@@ -1,14 +1,19 @@
 package com.example.motobratstvo.ui;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.motobratstvo.R;
 import com.example.motobratstvo.srcActivity.SrcActivity;
 import com.example.motobratstvo.checker.StringChecker;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -50,7 +55,7 @@ public class AddPostActivity extends AppCompatActivity {
                 // Текущее время
                 Date currentDate = new Date();
                 // Форматирование времени как "день.месяц.год"
-                DateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss", Locale.getDefault());
+                DateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd-HH:mm:ss", Locale.getDefault());
                 String dateText = dateFormat.format(currentDate);
 
 
@@ -64,13 +69,31 @@ public class AddPostActivity extends AppCompatActivity {
                         .child(Integer.toString(SrcActivity.initData.getLastId() + 1))
                         .child("date").setValue(dateText);
 
-                SrcActivity.initData.lastId++;
 
                 SrcActivity.mDatabase.child("news")
-                        .child("lastId").setValue(Integer.toString(SrcActivity.initData.lastId));
+                        .child("lastId").setValue(Integer.toString(SrcActivity.initData.lastId + 1));
 
-                Toast.makeText(AddPostActivity.this, "Posted",
-                        Toast.LENGTH_SHORT).show();
+                SrcActivity.mDatabase.child("news") .child(Integer.toString(SrcActivity.initData.lastId + 1)).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                        if (!task.isSuccessful()) {
+                            Log.e("firebase", "Error", task.getException());
+                        } else {
+                            if(! String.valueOf(task.getResult().getValue()).equals("null")) {
+                                Toast.makeText(AddPostActivity.this, "Posted",
+                                        Toast.LENGTH_SHORT).show();
+                                SrcActivity.initData.lastId++;
+                            }
+                            else {
+                                Toast.makeText(AddPostActivity.this, "Error",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+                });
+
+
+
             }
             else {
                 Toast.makeText(AddPostActivity.this, "Error: cant be empty",
