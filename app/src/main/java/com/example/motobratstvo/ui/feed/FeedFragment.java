@@ -1,6 +1,5 @@
 package com.example.motobratstvo.ui.feed;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,19 +13,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.motobratstvo.R;
-import com.example.motobratstvo.checker.StringChecker;
 import com.example.motobratstvo.srcActivity.SrcActivity;
 import com.example.motobratstvo.ui.AddPostActivity;
-import com.example.motobratstvo.ui.RegistrationActivity;
-import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
 public class FeedFragment extends Fragment {
-    private  ArrayList<News> news = new ArrayList<News>();
+    private  ArrayList<News> news = new ArrayList<>();
     public static InitData initData_ = new InitData();
     private Button feedButton;
 
@@ -45,7 +42,7 @@ public class FeedFragment extends Fragment {
         Collections.reverse(news);
 
         // создаем адаптер
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter((Context) getActivity(), news);
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(getActivity(), news);
         // устанавливаем для списка адаптер
         recView.setAdapter(adapter);
 
@@ -74,7 +71,7 @@ public class FeedFragment extends Fragment {
                 startActivity(intent);
             }
             else {
-                Toast.makeText((SrcActivity) getActivity(), "access denied",
+                Toast.makeText(getActivity(), "access denied",
                         Toast.LENGTH_SHORT).show();
             }
         });

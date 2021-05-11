@@ -5,26 +5,22 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
-import com.example.motobratstvo.R;
-import com.example.motobratstvo.ui.feed.InitData;
-import com.example.motobratstvo.ui.feed.News;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import java.util.ArrayList;
+import com.example.motobratstvo.R;
+import com.example.motobratstvo.ui.feed.InitData;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Objects;
 
 public class SrcActivity extends AppCompatActivity {
 
@@ -44,7 +40,6 @@ public class SrcActivity extends AppCompatActivity {
 
 
     public static InitData initData = new InitData();
-    public ArrayList<News> data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,25 +103,23 @@ public class SrcActivity extends AppCompatActivity {
                         Log.d(TAG, "signInWithEmail:success");
                         FirebaseUser user = mAuth.getCurrentUser();
 
+                        assert user != null;
                         String uid = user.getUid();
-                        mDatabase.child("users").child(uid).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                                if (!task.isSuccessful()) {
-                                    Log.e("firebase", "Error getting data", task.getException());
-                                } else {
-                                    String buff = String.valueOf(task.getResult().getValue());
-                                    Log.d("firebase_users", buff);
-                                    if(buff == "null") {
-                                        mDatabase.child("users")
-                                                .child(uid).setValue("default");
-                                    }
-                                    else {
-                                        role = buff;
-                                        saveConf();
-                                    }
-
+                        mDatabase.child("users").child(uid).get().addOnCompleteListener(task1 -> {
+                            if (!task1.isSuccessful()) {
+                                Log.e("firebase", "Error getting data", task1.getException());
+                            } else {
+                                String buff = String.valueOf(Objects.requireNonNull(task1.getResult()).getValue());
+                                Log.d("firebase_users", buff);
+                                if(buff.equals("null")) {
+                                    mDatabase.child("users")
+                                            .child(uid).setValue("default");
                                 }
+                                else {
+                                    role = buff;
+                                    saveConf();
+                                }
+
                             }
                         });
 
@@ -150,29 +143,15 @@ public class SrcActivity extends AppCompatActivity {
                         // Sign in success, update UI with the signed-in user's information
                         Log.d(TAG, "signInWithEmail:success");
                         FirebaseUser user = mAuth.getCurrentUser();
+                        assert user != null;
                         String uid = user.getUid();
-                        mDatabase.child("users").child(uid).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                                if (!task.isSuccessful()) {
-                                    Log.e("firebase", "Error getting data", task.getException());
-                                //} else {
-                                    /*String buff = String.valueOf(task.getResult().getValue());
-                                    Log.d("firebase_users", buff);
-                                    if(buff == "null") {
-                                        mDatabase.child("users")
-                                                .child(uid).setValue("default");
-                                    }
-                                    else {
-                                        role = buff;
-                                        saveConf();
-                                    }*/
-
-                                }
+                        mDatabase.child("users").child(uid).get().addOnCompleteListener(task1 -> {
+                            if (!task1.isSuccessful()) {
+                                Log.e("firebase", "Error getting data", task1.getException());
                             }
                         });
 
-                        updateUI(user);
+                        updateUI();
                     } else {
                         isAuth = false;
                         // If sign in fails, display a message to the user.
@@ -189,7 +168,7 @@ public class SrcActivity extends AppCompatActivity {
 
     public void reload() { }
 
-    public void updateUI(FirebaseUser user) {
+    public void updateUI() {
         super.finish();
     }
 
@@ -201,13 +180,5 @@ public class SrcActivity extends AppCompatActivity {
         editor.apply();
     }
 
-
-    public void refreshData(){
-        initData.refreshCount();
-        for (int i = 0; i < 1000; i++) {
-            initData.initData();
-        }
-        data = initData.getNews();
-    }
 
 }

@@ -2,18 +2,17 @@ package com.example.motobratstvo.ui.map;
 
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.fragment.app.Fragment;
+
 import com.example.motobratstvo.R;
-import com.example.motobratstvo.srcActivity.SrcActivity;
 import com.yandex.mapkit.Animation;
 import com.yandex.mapkit.GeoObjectCollection;
 import com.yandex.mapkit.MapKitFactory;
@@ -39,12 +38,19 @@ import com.yandex.runtime.image.ImageProvider;
 import com.yandex.runtime.network.NetworkError;
 import com.yandex.runtime.network.RemoteError;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
+
 
 public class MapFragment extends Fragment implements TrafficListener, Session.SearchListener, CameraListener {
 
-    private TextView levelText;
     private ImageButton levelIcon;
     private TrafficLevel trafficLevel = null;
+
+    public MapFragment() {
+    }
+
     private enum TrafficFreshness {Loading, OK, Expired}
 
     private TrafficFreshness trafficFreshness;
@@ -54,15 +60,14 @@ public class MapFragment extends Fragment implements TrafficListener, Session.Se
 
     private EditText searchEdit;
     private SearchManager searchManager;
-    private Session searchSession;
 
 
     private void submitQuery(String query) {
-        searchSession = searchManager.submit(
+        searchManager.submit(
                 query,
                 VisibleRegionUtils.toPolygon(mapView.getMap().getVisibleRegion()),
                 new SearchOptions(),
-                (Session.SearchListener) this);
+                this);
     }
 
     @Override public void onCreate(Bundle savedInstanceState) {
@@ -81,15 +86,12 @@ public class MapFragment extends Fragment implements TrafficListener, Session.Se
 
         mapView.getMap().addCameraListener(this);
         searchEdit = v.findViewById(R.id.search_edit);
-        searchEdit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    submitQuery(searchEdit.getText().toString());
-                }
-
-                return false;
+        searchEdit.setOnEditorActionListener((textView, actionId, keyEvent) -> {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                submitQuery(searchEdit.getText().toString());
             }
+
+            return false;
         });
 
 
@@ -121,7 +123,6 @@ public class MapFragment extends Fragment implements TrafficListener, Session.Se
 
     private void updateLevel() {
         int iconId;
-        String level = "";
         if (!traffic.isTrafficVisible()) {
             iconId = R.drawable.icon_traffic_light_dark;
         } else if (trafficFreshness == TrafficFreshness.Loading) {
@@ -137,7 +138,6 @@ public class MapFragment extends Fragment implements TrafficListener, Session.Se
                 case YELLOW: iconId = R.drawable.icon_traffic_light_yellow; break;
                 default: iconId = R.drawable.icon_traffic_light_grey; break;
             }
-            level = Integer.toString(trafficLevel.getLevel());
         }
         levelIcon.setImageBitmap(BitmapFactory.decodeResource(getResources(), iconId));
 //        levelText.setText(level);
@@ -173,18 +173,18 @@ public class MapFragment extends Fragment implements TrafficListener, Session.Se
         mapObjects.clear();
 
         for (GeoObjectCollection.Item searchResult : response.getCollection().getChildren()) {
-            Point resultLocation = searchResult.getObj().getGeometry().get(0).getPoint();
+            Point resultLocation = Objects.requireNonNull(searchResult.getObj()).getGeometry().get(0).getPoint();
             if (resultLocation != null) {
                 mapObjects.addPlacemark(
                         resultLocation,
-                        ImageProvider.fromResource((SrcActivity) getActivity(), R.drawable.search_result));
+                        ImageProvider.fromResource(requireActivity(), R.drawable.search_result));
             }
         }
     }
 
 
     @Override
-    public void onSearchError(Error error) {
+    public void onSearchError(@NotNull Error error) {
         String errorMessage = getString(R.string.unknown_error_message);
         if (error instanceof RemoteError) {
             errorMessage = getString(R.string.remote_error_message);
@@ -192,14 +192,14 @@ public class MapFragment extends Fragment implements TrafficListener, Session.Se
             errorMessage = getString(R.string.network_error_message);
         }
 
-        Toast.makeText((SrcActivity)getActivity(), errorMessage, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), errorMessage, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onCameraPositionChanged(
-            Map map,
-            CameraPosition cameraPosition,
-            CameraUpdateReason cameraUpdateReason,
+            @NotNull Map map,
+            @NotNull CameraPosition cameraPosition,
+            @NotNull CameraUpdateReason cameraUpdateReason,
             boolean finished) {
         if (finished) {
             submitQuery(searchEdit.getText().toString());

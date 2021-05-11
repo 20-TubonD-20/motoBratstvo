@@ -7,20 +7,20 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.motobratstvo.R;
-import com.example.motobratstvo.srcActivity.SrcActivity;
 import com.example.motobratstvo.checker.StringChecker;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
+import com.example.motobratstvo.srcActivity.SrcActivity;
+
+import java.util.Objects;
 
 public class RegistrationActivity extends AppCompatActivity {
 
-    private TextView emailTextEnter, passwordTextEnter, passwordText, emailText;
+    private TextView emailTextEnter;
+    private TextView passwordTextEnter;
     private Button regButton, backButton;
-    private static String TAG = "firebase";
+    private static final String TAG = "firebase";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +29,8 @@ public class RegistrationActivity extends AppCompatActivity {
 
         emailTextEnter = findViewById(R.id.editTextWriteTitle);
         passwordTextEnter = findViewById(R.id.editTextWriteText);
-        passwordText = findViewById(R.id.textWriteText);
-        emailText = findViewById(R.id.textWriteTitle);
+        findViewById(R.id.textWriteText);
+        findViewById(R.id.textWriteTitle);
         regButton = findViewById(R.id.buttonSubmit);
         backButton = findViewById(R.id.buttonBackEdit);
 
@@ -60,31 +60,26 @@ public class RegistrationActivity extends AppCompatActivity {
             else {
 
                 SrcActivity.mAuth.createUserWithEmailAndPassword(emailBuff, passwordBuff)
-                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    // Sign in success, update UI with the signed-in user's information
-                                    Log.d(TAG, "createUserWithEmail:success");
-                                    Toast.makeText(RegistrationActivity.this, "User created",
-                                            Toast.LENGTH_SHORT).show();
-                                            finish();
-                                } else {
-                                    // If sign in fails, display a message to the user.
-                                    Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                                    Toast.makeText(RegistrationActivity.this, task.getException().getMessage(),
-                                            Toast.LENGTH_SHORT).show();
+                        .addOnCompleteListener(this, task -> {
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                Log.d(TAG, "createUserWithEmail:success");
+                                Toast.makeText(RegistrationActivity.this, "User created",
+                                        Toast.LENGTH_SHORT).show();
+                                        finish();
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                                Toast.makeText(RegistrationActivity.this, Objects.requireNonNull(task.getException()).getMessage(),
+                                        Toast.LENGTH_SHORT).show();
 
-                                }
                             }
                         });
 
             }
         });
 
-        backButton.setOnClickListener(view -> {
-            super.finish();
-        });
+        backButton.setOnClickListener(view -> super.finish());
 
     }
 
