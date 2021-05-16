@@ -18,11 +18,9 @@ import java.util.Locale;
 import java.util.Objects;
 
 public class AddPostActivity extends AppCompatActivity {
-
     private TextView editText;
     private TextView editTitle;
     private Button submitButton, backButton;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +40,6 @@ public class AddPostActivity extends AppCompatActivity {
 
         submitButton.setOnClickListener(view -> {
             String textBuff, titleBuff;
-
             titleBuff = editTitle.getText().toString();
             textBuff = editText.getText().toString();
 
@@ -53,7 +50,6 @@ public class AddPostActivity extends AppCompatActivity {
                 DateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd-HH:mm:ss", Locale.getDefault());
                 String dateText = dateFormat.format(currentDate);
 
-
                 SrcActivity.mDatabase.child("news")
                         .child(Integer.toString(SrcActivity.initData.getLastId() + 1))
                         .child("title").setValue(titleBuff);
@@ -63,8 +59,6 @@ public class AddPostActivity extends AppCompatActivity {
                 SrcActivity.mDatabase.child("news")
                         .child(Integer.toString(SrcActivity.initData.getLastId() + 1))
                         .child("date").setValue(dateText);
-
-
                 SrcActivity.mDatabase.child("news")
                         .child("lastId").setValue(Integer.toString(SrcActivity.initData.lastId + 1));
 
@@ -83,9 +77,6 @@ public class AddPostActivity extends AppCompatActivity {
                         }
                     }
                 });
-
-
-
             }
             else {
                 Toast.makeText(AddPostActivity.this, "Error: cant be empty",
@@ -93,7 +84,5 @@ public class AddPostActivity extends AppCompatActivity {
             }
         });
        backButton.setOnClickListener(view -> super.finish());
-
     }
-
 }

@@ -23,22 +23,17 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.Objects;
 
 public class SrcActivity extends AppCompatActivity {
-
     private static final String TAG = "EmailPassword";
     public static FirebaseAuth mAuth;
     public static DatabaseReference mDatabase;
     public String email = "null", password = "null", role = "null";
     public boolean isAuth = false;
-
     public NavController navController;
-
     public static String APP_PREFERENCES = "usersettings";
     public static String APP_PREFERENCES_EMAIL = "email";
     public static String APP_PREFERENCES_PASSWORD = "password";
     public static String APP_PREFERENCES_ROLE = "role";
-    SharedPreferences mSettings;
-
-
+    public SharedPreferences mSettings;
     public static InitData initData = new InitData();
 
     @Override
@@ -92,7 +87,6 @@ public class SrcActivity extends AppCompatActivity {
         super.onStart();
 
     }
-
 
     public void signIn(String email, String password) {
         mAuth.signInWithEmailAndPassword(email, password)
@@ -179,6 +173,5 @@ public class SrcActivity extends AppCompatActivity {
         editor.putString(APP_PREFERENCES_ROLE, role);
         editor.apply();
     }
-
-
 }
+

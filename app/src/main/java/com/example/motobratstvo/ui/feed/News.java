@@ -2,7 +2,6 @@ package com.example.motobratstvo.ui.feed;
 
 public class News {
     private final String title;
-    //private int image;
     private final String date;
     private String text;
     private int id;

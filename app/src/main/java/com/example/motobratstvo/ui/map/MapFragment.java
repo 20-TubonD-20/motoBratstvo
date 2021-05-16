@@ -52,15 +52,11 @@ public class MapFragment extends Fragment implements TrafficListener, Session.Se
     }
 
     private enum TrafficFreshness {Loading, OK, Expired}
-
     private TrafficFreshness trafficFreshness;
     private MapView mapView;
     private TrafficLayer traffic;
-
-
     private EditText searchEdit;
     private SearchManager searchManager;
-
 
     private void submitQuery(String query) {
         searchManager.submit(
@@ -73,8 +69,6 @@ public class MapFragment extends Fragment implements TrafficListener, Session.Se
     @Override public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
-
-    /** INFLATE AND POSITION **/
 
     @Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_map, container, false);
@@ -94,8 +88,6 @@ public class MapFragment extends Fragment implements TrafficListener, Session.Se
             return false;
         });
 
-
-//        levelText = v.findViewById(R.id.traffic_light_text);
         levelIcon = v.findViewById(R.id.traffic_light);
         levelIcon.setOnClickListener(this::onLightClick);
         traffic = MapKitFactory.getInstance().createTrafficLayer(mapView.getMapWindow());
@@ -106,8 +98,6 @@ public class MapFragment extends Fragment implements TrafficListener, Session.Se
         submitQuery(searchEdit.getText().toString());
         return v;
     }
-
-
 
     @Override public void onStart() {
         super.onStart();
@@ -129,7 +119,7 @@ public class MapFragment extends Fragment implements TrafficListener, Session.Se
             iconId = R.drawable.icon_traffic_light_violet;
         } else if (trafficFreshness == TrafficFreshness.Expired) {
             iconId = R.drawable.icon_traffic_light_blue;
-        } else if (trafficLevel == null) {  // state is fresh but region has no data
+        } else if (trafficLevel == null) {
             iconId = R.drawable.icon_traffic_light_grey;
         } else {
             switch (trafficLevel.getColor()) {
@@ -140,14 +130,12 @@ public class MapFragment extends Fragment implements TrafficListener, Session.Se
             }
         }
         levelIcon.setImageBitmap(BitmapFactory.decodeResource(getResources(), iconId));
-//        levelText.setText(level);
     }
 
     public void onLightClick(View view) {
         traffic.setTrafficVisible(!traffic.isTrafficVisible());
         updateLevel();
     }
-
 
     public void onTrafficChanged(TrafficLevel trafficLevel) {
         this.trafficLevel = trafficLevel;
@@ -181,7 +169,6 @@ public class MapFragment extends Fragment implements TrafficListener, Session.Se
             }
         }
     }
-
 
     @Override
     public void onSearchError(@NotNull Error error) {
