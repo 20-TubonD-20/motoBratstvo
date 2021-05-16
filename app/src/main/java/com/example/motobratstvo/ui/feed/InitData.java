@@ -18,12 +18,12 @@ public class InitData {
     private final DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("/news");
     public ArrayList<News> news = new ArrayList<>();
     String date, buffTitle, buffText, buffText2 = "";
-    public int lastId;
+    public int lastId = -1;
     int count = 1;
 
 
-    public void initData() {
-            mDatabase.child(Integer.toString(count)).child("title").get().addOnCompleteListener(task -> {
+    public void initData(int c) {
+            mDatabase.child(Integer.toString(c)).child("title").get().addOnCompleteListener(task -> {
                 if (!task.isSuccessful()) {
                     Log.e("firebase", "Error getting data", task.getException());
                     buffTitle = "null";
@@ -34,7 +34,7 @@ public class InitData {
                 }
             });
 
-            mDatabase.child(Integer.toString(count)).child("text").get().addOnCompleteListener(task -> {
+            mDatabase.child(Integer.toString(c)).child("text").get().addOnCompleteListener(task -> {
                 if (!task.isSuccessful()) {
                     Log.e("firebase", "Error getting data", task.getException());
                     buffText = "null";
@@ -44,7 +44,7 @@ public class InitData {
                 }
             });
 
-        mDatabase.child(Integer.toString(count)).child("date").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+        mDatabase.child(Integer.toString(c)).child("date").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             final int count_ = count;
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
@@ -53,16 +53,16 @@ public class InitData {
                     date = "null";
                 } else {
                     date = String.valueOf(Objects.requireNonNull(task.getResult()).getValue());
-                    Log.d("firebase", date);
+                    Log.d("firebaseInit ", date);
+                    Log.d("firebaseInit ", Integer.toString(c));
                     if(!buffTitle.equals("null")) {
                         news.add(new News(buffTitle, buffText, date, count_));
+                        lastId = c;
                     }
 
                 }
             }
         });
-            count++;
-        if(count > 100000) count = 2;
     }
 
     public void initLastId() {

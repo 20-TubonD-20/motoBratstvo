@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.motobratstvo">
 
     <application
@@ -20,7 +21,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.RegistrationActivity">
+        <activity android:name=".ui.RegistrationActivity"
+            tools:ignore="ExtraText">
             android:screenOrientation="portrait"
         </activity>
         <activity android:name=".srcActivity.SrcActivity">
