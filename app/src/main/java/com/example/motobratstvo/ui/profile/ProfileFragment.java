@@ -87,14 +87,14 @@ public class ProfileFragment extends Fragment {
                 emailBuff = emailText.getText().toString();
                 passwordBuff = passwordText.getText().toString();
 
-                if(stringChecker.checkPassword(passwordBuff) == 1) {
-                    Toast.makeText((SrcActivity) getActivity(), "Error: must be > 5 syms",
+                if(stringChecker.checkEmail(emailBuff) == 1) {
+                    Toast.makeText((SrcActivity) getActivity(), "Error: email must contain @",
                             Toast.LENGTH_SHORT).show();
                 }
 
-                else if(stringChecker.checkEmail(emailBuff) == 1) {
-                    Toast.makeText((SrcActivity) getActivity(), "Error: must be one @",
-                            Toast.LENGTH_SHORT).show();
+                else if (stringChecker.checkPassword(passwordBuff) == 1) {
+                        Toast.makeText((SrcActivity) getActivity(), "Error: password must contain more than 5 characters",
+                                Toast.LENGTH_SHORT).show();
                 }
                 else {
                     scrActivity.email = emailBuff;

@@ -48,14 +48,14 @@ public class RegistrationActivity extends AppCompatActivity {
             emailBuff = emailTextEnter.getText().toString();
             passwordBuff = passwordTextEnter.getText().toString();
 
-            if(stringChecker.checkPassword(passwordBuff) == 1) {
-                Toast.makeText(RegistrationActivity.this, "Error: password must contain more than 5 characters",
+            if(stringChecker.checkEmail(emailBuff) == 1) {
+                Toast.makeText(RegistrationActivity.this, "Error: email must contain @",
                         Toast.LENGTH_SHORT).show();
             }
 
-            else if(stringChecker.checkEmail(emailBuff) == 1) {
-                Toast.makeText(RegistrationActivity.this, "Error: email must contain @",
-                        Toast.LENGTH_SHORT).show();
+            else if(stringChecker.checkPassword(passwordBuff) == 1) {
+                    Toast.makeText(RegistrationActivity.this, "Error: password must contain more than 5 characters",
+                            Toast.LENGTH_SHORT).show();
             }
             else {
 
