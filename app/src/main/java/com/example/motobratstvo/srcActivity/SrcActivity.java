@@ -107,6 +107,7 @@ public class SrcActivity extends AppCompatActivity {
                                 if(buff.equals("null")) {
                                     mDatabase.child("users")
                                             .child(uid).setValue("default");
+                                    role = "default";
                                 }
                                 else {
                                     role = buff;
