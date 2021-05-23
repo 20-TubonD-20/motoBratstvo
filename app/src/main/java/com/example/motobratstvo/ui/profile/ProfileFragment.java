@@ -77,8 +77,6 @@ public class ProfileFragment extends Fragment {
             });
 
             loginButton.setOnClickListener(v -> {
-                //Log.d("BUTTOM TEST", emailText.getText().toString());
-                //Log.d("BUTTOM TEST", passwordText.getText().toString());
 
                 StringChecker stringChecker = new StringChecker();
 
