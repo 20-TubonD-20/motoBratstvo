@@ -40,8 +40,15 @@ public class InitData {
             } else {
                 date = String.valueOf(Objects.requireNonNull(task.getResult()).getValue());
 
+                News finded = null;
+                for(News test : news){
+                    if(test.id == c){
+                        finded = test;
+                        break;
+                    }
+                }
 
-                if(!buffTitle.equals("null") && news.size() <= c) {
+                if(!buffTitle.equals("null") && finded == null) {
                     news.add(new News(buffTitle, buffText, date, c));
                     lastId = c;
                 }
