@@ -4,7 +4,7 @@ public class News {
     private final String title;
     private final String date;
     private String text;
-    private int id;
+    public int id;
 
     public News(String title, String text, String date, int id) {
         this.title = title;

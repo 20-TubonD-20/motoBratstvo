@@ -1,6 +1,9 @@
 package com.example.motobratstvo.ui.feed;
 
+import android.os.Build;
 import android.util.Log;
+
+import androidx.annotation.RequiresApi;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -15,6 +18,7 @@ public class InitData {
     public String date = "", buffTitle = "", buffText = "", buffText2 = "";
     public int lastId = -1;
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public void initData(int c) {
         mDatabase.child(Integer.toString(c)).child("title").get().addOnCompleteListener(task -> {
                 if (!task.isSuccessful()) {
@@ -35,7 +39,9 @@ public class InitData {
                 date = "null";
             } else {
                 date = String.valueOf(Objects.requireNonNull(task.getResult()).getValue());
-                if(!buffTitle.equals("null")) {
+
+
+                if(!buffTitle.equals("null") && news.size() <= c) {
                     news.add(new News(buffTitle, buffText, date, c));
                     lastId = c;
                 }
